@@ -3,7 +3,7 @@ var app = angular.module('ABMangularPHP', []);
 
 
 app.controller('controlMenu', function($scope, $http) {
-  $scope.DatoTest="**Menu**";
+  $scope.DatoTest="**Ferreyra**";
 });
 
 
@@ -13,16 +13,20 @@ app.controller('controlAlta', function($scope, $http) {
 //inicio las variables
   $scope.persona={};
   $scope.persona.nombre= "natalia" ;
- $scope.persona.dni= "12312312" ;
+  $scope.persona.dni= "12312312" ;
   $scope.persona.apellido= "natalia" ;
   $scope.persona.foto="sinfoto";
 
+  $scope.mascota={};
+  $scope.mascota.raza="cocker";
+  $scope.mascota.nombre="pepe";
+  $scope.mascota.fecha= new Date();
 
   $scope.Guardar=function(){
 
 
-  	console.log("persona a guardar:");
-    console.log($scope.persona);
+  	console.log("mascota a guardar:");
+    console.log($scope.mascota);
 
     /*
     $http.post('PHP/nexo.php', { datos: {accion :"insertar",persona:$scope.persona}})
