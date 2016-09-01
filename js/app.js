@@ -60,7 +60,14 @@ app.controller('controlGrilla', function($scope, $http) {
      		
  	 });*/
 
-
+$http.get('http://www.mocky.io/v2/57c8229b120000f903e76996')
+.then( function(datos){
+  $scope.listadoDeDatos = datos.data;
+  console.log(datos.data);
+}, function(error){
+  console.info("error: ", error);
+  $scope.listadoDeDatos = [];
+});
 
 
   /*
