@@ -53,13 +53,38 @@
 			<h1> <!--?php echo $titulo; ?-->titulo </h1>
 
 			<form id="FormIngreso"  enctype="multipart/form-data" >
-				<input type="text" name="apellido" ng-model="mascota.raza" placeholder="ingrese apellido" value="" />
+				<input type="text" name="apellido" ng-model="persona.apellido" placeholder="ingrese apellido" value="" />
 				<span id="lblApellido" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*
 				</span>
-				<input type="text" name="nombre" ng-model="mascota.nombre" placeholder="ingrese nombre" value="" /> <span id="lblNombre" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
-				<input type="text" name="dni" ng-model="mascota.fecha" placeholder="ingrese dni" value=""     /> 
+				<input type="text" name="nombre" ng-model="persona.nombre" placeholder="ingrese nombre" value="" /> <span id="lblNombre" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
+				
+				<p style='color: black;'>*El DNI no se puede modificar.</p>
+
+				<input type="email" name="email" ng-model="persona.email" placeholder="ingrese email" value=""     /> 
 				<span id="lblDni" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
-				<p style='color: black;'>*El DNI no se puede modificar.</p> ": "" ; ?>
+				<input type="number" name="edad" ng-model="persona.edad" placeholder="ingrese edad" value=""     />
+
+				<select name="estadoCivil" ng-model="persona.estado">
+  					<option value="casado">casado</option>
+  					<option value="soltero">soltero</option>
+  					<option value="viudo">viudo</option>
+  					<option value="divorciado">divorciado</option>
+				</select>
+
+				<input type="radio" name="sexo" value="Male" ng-model="persona.sexo"><label>Masculino</label><br>
+ 				<input type="radio" name="sexo" value="Famale" ng-model="persona.sexo"><label>Femenino</label><br>
+
+				<input type="number" name="dni" ng-model="persona.dni" placeholder="ingrese dni" value=""     /> 
+
+				<input type="date" name="fecha" ng-model="persona.fecha" placeholder="ingrese fecha" value=""     /> 
+
+				<input type="password" name="password" ng-model="persona.password" placeholder="ingrese password" value=""/> 
+
+				<input type="password" name="rePassword" ng-model="persona.rePassword" placeholder="Reingrese password" value=""/>
+
+				<input type="checkbox" name="csharp" ng-model="persona.csharp"><label>C#</label><br>
+
+				<input type="checkbox" name"php" ng-model="persona.php"/><label>PHP</label><br>
 				
 				<input type="hidden" name="idOculto" id="id" value="" />
 				<!--
@@ -70,7 +95,7 @@
 				<p style="  color: black;">*La foto se actualiza al guardar.</p>
 				-->
 
-				<a class="btn btn-info " name="guardar" ng-click="Guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Guardar</a>
+				<a class="btn btn-info " name="guardar" ng-click="Guardar()" ng-if="persona.php"><span class="glyphicon glyphicon-save">&nbsp;</span>Guardar</a>
 					
 				<input type="hidden" value="" id="idParaModificar" name="agregar" />
 				<input type="hidden" value="" id="hdnAgregar" name="agregar" />

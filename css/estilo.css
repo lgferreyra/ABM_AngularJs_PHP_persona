@@ -3,6 +3,39 @@ input[type="text"]{
   display: block;
   color:black;
 height: 3em;
+width: 100%
+}
+
+input[type="number"]{
+
+  display: block;
+  color:black;
+height: 3em;
+width: 100%
+}
+
+input[type="email"]{
+
+  display: block;
+  color:black;
+height: 3em;
+width: 100%
+}
+
+input[type="date"]{
+
+  display: block;
+  color:black;
+height: 3em;
+width: 100%
+}
+
+input[type="password"]{
+
+  display: block;
+  color:black;
+height: 3em;
+width: 100%
 }
 .nav-tabs {
     border-bottom: 1px solid #151313 !important;
@@ -12,6 +45,10 @@ height: 3em;
 li.btn {
     height: 49px;
 
+}
+
+label{
+  color: black;
 }
 
 * {
