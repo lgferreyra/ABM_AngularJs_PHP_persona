@@ -58,8 +58,6 @@
 				</span>
 				<input type="text" name="nombre" ng-model="persona.nombre" placeholder="ingrese nombre" value="" required/> 
 				<span id="lblNombre" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
-				
-				<p style='color: black;'>*El DNI no se puede modificar.</p>
 
 				<input type="email" name="email" ng-model="persona.email" placeholder="ingrese email" value="" required/> 
 				<span id="lblDni" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
@@ -83,17 +81,17 @@
 
 				<input type="password" name="rePassword" ng-model="persona.rePassword" placeholder="Reingrese password" value="" required/>
 
-				<input type="checkbox" name="csharp" ng-required="FormIngreso.csharp || FormIngreso.php || FormIngreso.visual || FormIngreso.html || FormIngreso.javascript || FormIngreso.java" ng-model="persona.csharp"><label>C#</label><br>
+				<input type="checkbox" name="csharp" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.csharp"><label>C#</label><br>
 
-				<input type="checkbox" name"php" ng-required="FormIngreso.csharp || FormIngreso.php || FormIngreso.visual || FormIngreso.html || FormIngreso.javascript || FormIngreso.java" ng-model="persona.php"/><label>PHP</label><br>
+				<input type="checkbox" name"php" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.php"/><label>PHP</label><br>
 
-				<input type="checkbox" name"visual" ng-required="FormIngreso.csharp || FormIngreso.php || FormIngreso.visual || FormIngreso.html || FormIngreso.javascript || FormIngreso.java" ng-model="persona.visual"/><label>Visual Studio</label><br>
+				<input type="checkbox" name"visual" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.visual"/><label>Visual Studio</label><br>
 
-				<input type="checkbox" name"html" ng-required="FormIngreso.csharp || FormIngreso.php || FormIngreso.visual || FormIngreso.html || FormIngreso.javascript || FormIngreso.java" ng-model="persona.html"/><label>HTML</label><br>
+				<input type="checkbox" name"html" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.html"/><label>HTML</label><br>
 
-				<input type="checkbox" name"javascript" ng-required="FormIngreso.csharp || FormIngreso.php || FormIngreso.visual || FormIngreso.html || FormIngreso.javascript || FormIngreso.java" ng-model="persona.javascript"/><label>JavaScritp</label><br>
+				<input type="checkbox" name"javascript" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.javascript"/><label>JavaScritp</label><br>
 
-				<input type="checkbox" name"java" ng-required="FormIngreso.csharp || FormIngreso.php || FormIngreso.visual || FormIngreso.html || FormIngreso.javascript || FormIngreso.java" ng-model="persona.java"/><label>Java</label><br>
+				<input type="checkbox" name"java" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.java"/><label>Java</label><br>
 				
 				<input type="hidden" name="idOculto" id="id" value="" />
 				<!--

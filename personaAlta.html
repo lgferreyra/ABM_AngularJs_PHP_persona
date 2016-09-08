@@ -1,0 +1,66 @@
+<div class="container">
+		<div class="page-header">
+			<center> <h1>Datos {{DatoTest}} {{mascota}}</h1>   </center>     
+		</div>
+		<div class="CajaInicio animated bounceInRight">
+			<h1> <!--?php echo $titulo; ?-->titulo </h1>
+
+			<form name="FormIngreso"  enctype="multipart/form-data" novalidate>
+				<input type="text" name="apellido" ng-model="persona.apellido" placeholder="ingrese apellido" value="" required/>
+				<span id="lblApellido" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*
+				</span>
+				<input type="text" name="nombre" ng-model="persona.nombre" placeholder="ingrese nombre" value="" required/> 
+				<span id="lblNombre" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
+
+				<input type="email" name="email" ng-model="persona.email" placeholder="ingrese email" value="" required/> 
+				<span id="lblDni" style="display:none;color:#FF0000;width:1%;float:right;font-size:80">*</span>
+				<input type="number" name="edad" ng-model="persona.edad" placeholder="ingrese edad" required/>
+
+				<select name="estadoCivil" ng-model="persona.estado" required>
+  					<option value="soltero">soltero</option>
+  					<option value="casado">casado</option>
+  					<option value="divorciado">divorciado</option>
+  					<option value="viudo">viudo</option>
+				</select>
+
+				<input type="radio" name="sexo" value="Male" ng-model="persona.sexo"><label>Masculino</label><br>
+ 				<input type="radio" name="sexo" value="Famale" ng-model="persona.sexo"><label>Femenino</label><br>
+
+				<input type="number" name="dni" ng-model="persona.dni" placeholder="ingrese dni" required/> 
+
+				<input type="date" name="fecha" ng-model="persona.fecha" placeholder="ingrese fecha" required/> 
+
+				<input type="password" name="password" ng-model="persona.password" placeholder="ingrese password" value="" required/> 
+
+				<input type="password" name="rePassword" ng-model="persona.rePassword" placeholder="Reingrese password" value="" required/>
+
+				<input type="checkbox" name="csharp" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.csharp"><label>C#</label><br>
+
+				<input type="checkbox" name"php" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.php"/><label>PHP</label><br>
+
+				<input type="checkbox" name"visual" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.visual"/><label>Visual Studio</label><br>
+
+				<input type="checkbox" name"html" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.html"/><label>HTML</label><br>
+
+				<input type="checkbox" name"javascript" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.javascript"/><label>JavaScritp</label><br>
+
+				<input type="checkbox" name"java" ng-required="!(persona.csharp || persona.php || persona.visual || persona.html || persona.javascript || persona.java)" ng-model="persona.java"/><label>Java</label><br>
+				
+				<input type="hidden" name="idOculto" id="id" value="" />
+				<!--
+				<input type="file" name="foto" />
+
+
+				<img  src="fotos/pordefecto.png" class="fotoform" id="foto"/>
+				<p style="  color: black;">*La foto se actualiza al guardar.</p>
+				-->
+
+				<a class="btn btn-info " name="guardar" ng-click="Guardar()" ng-disabled="FormIngreso.$invalid && FormIngreso.sexo.$pristine"><span class="glyphicon glyphicon-save">&nbsp;</span>Guardar</a> {{FormIngreso.$invalid}}
+					
+				<input type="hidden" value="" id="idParaModificar" name="agregar" />
+				<input type="hidden" value="" id="hdnAgregar" name="agregar" />
+				</div>
+
+			</form>
+	</div>
+	</div>
