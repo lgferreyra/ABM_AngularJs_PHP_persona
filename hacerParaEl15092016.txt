@@ -1,0 +1,1 @@
+inicio tiene que referenciarse a juego, login y abmPersona
