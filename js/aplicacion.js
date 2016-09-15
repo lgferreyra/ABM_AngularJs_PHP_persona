@@ -289,6 +289,7 @@ app.controller("controlPersonaAlta", function($scope, FileUploader){
     //       };
           $scope.uploader.onCompleteAll = function() {
               console.info('Se cargo con exito');
+              console.info('uploader', $scope.uploader);
           };
 
 
