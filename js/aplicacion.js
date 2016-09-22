@@ -2,6 +2,7 @@ var app = angular.module("myApp",['ui.router', 'angularFileUpload', 'satellizer'
 
 app.config( function($stateProvider, $urlRouterProvider, $authProvider){
 
+
   $authProvider.loginUrl="ABM_AngularJs_PHP_persona/PHP/server/jwt/php/auth.php";
   $authProvider.tokenName="myToken";
   $authProvider.tokenPrefix="myApp";
@@ -449,15 +450,27 @@ app.controller("controlJuegoEjercicio13", function($scope){
 });
 
 app.controller("controlLogin", function($scope, $auth){
+
+
+  if($auth.isAuthenticated()){
+        console.info("info login: ", $auth.getPayload(), $auth.isAuthenticated());
+      }else {
+        console.info("No Loguea: ", $auth.getPayload(), $auth.isAuthenticated());
+      }
+
+
+
   $scope.Ingresar = function(){
-    console.log($auth);
+
     $auth.login({usuario:$scope.persona.user, clave:$scope.persona.password})
     .then(function(respuesta){
-       console.log(respuesta);
+       console.info("info respuesta", respuesta);
+
+
       if($auth.isAuthenticated()){
         console.info("info login: ", $auth.getPayload(), $auth.isAuthenticated());
       }else {
-        console.info("info login: ", $auth.getPayload(), $auth.isAuthenticated());
+        console.info("No Loguea: ", $auth.getPayload(), $auth.isAuthenticated());
       }
     },function(respuesta){
        
