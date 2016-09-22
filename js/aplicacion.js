@@ -1,6 +1,11 @@
-var app = angular.module("myApp",['ui.router', 'angularFileUpload']);
+var app = angular.module("myApp",['ui.router', 'angularFileUpload', 'satellizer']);
 
-app.config( function($stateProvider, $urlRouterProvider){
+app.config( function($stateProvider, $urlRouterProvider, $authProvider){
+
+  $authProvider.loginUrl="ABM_AngularJs_PHP_persona/PHP/server/jwt/php/auth.php";
+  $authProvider.tokenName="myToken";
+  $authProvider.tokenPrefix="myApp";
+  $authProvider.authHeader="data";
 
   $stateProvider
     .state(
@@ -211,6 +216,13 @@ app.config( function($stateProvider, $urlRouterProvider){
             controller:"controlJuegoEjercicio13"
           }
         }
+      }
+      )
+    .state(
+      "login", {
+        url:"/login",
+        templateUrl:"login.html",
+        controller:"controlLogin"
       }
       );
     $urlRouterProvider.otherwise('/inicio');
@@ -434,4 +446,21 @@ app.controller("controlJuegoEjercicio12", function($scope){
 
 app.controller("controlJuegoEjercicio13", function($scope){
 
+});
+
+app.controller("controlLogin", function($scope, $auth){
+  $scope.Ingresar = function(){
+    console.log($auth);
+    $auth.login({usuario:$scope.persona.user, clave:$scope.persona.password})
+    .then(function(respuesta){
+       console.log(respuesta);
+      if($auth.isAuthenticated()){
+        console.info("info login: ", $auth.getPayload(), $auth.isAuthenticated());
+      }else {
+        console.info("info login: ", $auth.getPayload(), $auth.isAuthenticated());
+      }
+    },function(respuesta){
+       
+    });
+  }
 });
