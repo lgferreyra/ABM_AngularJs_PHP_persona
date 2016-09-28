@@ -22,14 +22,16 @@ if(isset($_GET['accion']))
 }
 else{
 //var_dump($_REQUEST);
-	echo "<br>";
-	var_dump($_POST);
-	/*
+	//echo "<br>";
+	//var_dump($_POST['datos']);
+	
 	$DatosPorPost = file_get_contents("php://input");
 	$respuesta = json_decode($DatosPorPost);
 	var_dump($respuesta);
-*/
-
+    
+    if($respuesta->datos->accion=="registrar"){
+        echo Usuario::InsertarUsuario($respuesta->datos->usuario);
+    }
 	//echo $respuesta->datos->persona->nombre;
 
 	//Persona::InsertarPersona($respuesta->datos->persona);

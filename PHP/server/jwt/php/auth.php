@@ -8,6 +8,7 @@ $respuesta = json_decode($DatosPorPost);
 
 if (Usuario::ValidarUsuario($respuesta->usuario, $respuesta->clave)) {
     $token["exp"] = time() + 15;
+    $token["message"] = "userRegister";
     $key = "123456";
 
     /**
