@@ -20,7 +20,11 @@
                         <a ui-sref="juego.menu()">Juego</a>
                     </li>
                     <li>
-                        <a ui-sref="login()">Login</a>
+                        <a ng-if="!auth" ui-sref="persona.login()">Login</a>
+                        <a ng-if="auth" ng-click="logout()">Logout</a>
+                    </li>
+                    <li>
+                        <a ui-sref="persona.register()">Registrarse</a>
                     </li>
                 </ul>
             </div>

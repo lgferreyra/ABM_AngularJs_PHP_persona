@@ -26,12 +26,15 @@ class Usuario {
 
 	public static function ValidarUsuario($user, $pass){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("select * from usuario where user =:user and pass = :pass");
-		$consulta->bindValue(':user', $user, PDO::PARAM_STRING);
-		$consulta->bindValue(':pass', $pass, PDO::PARAM_STRING);
+		$consulta =$objetoAccesoDato->RetornarConsulta("select * from usuario where username =:user and pass = :pass");
+		$consulta->bindValue(':user', $user, PDO::PARAM_STR);
+		$consulta->bindValue(':pass', $pass, PDO::PARAM_STR);
 		$consulta->execute();
-		$alumnoBuscado = $consulta->fetchObject('usuario');
-		return $alumnoBuscado;
+		if($consulta->rowCount()==1){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
  ?>

@@ -1,6 +1,7 @@
 <?php 
 
 include "clases/Personas.php";
+include "clases/Usuario.php";
 // $_GET['accion'];
 if(isset($_GET['accion']))
 {
@@ -14,7 +15,7 @@ if(isset($_GET['accion']))
 		$arrayJson = json_encode($respuesta);
 		echo  $arrayJson;
 	}
-
+    
 
 	
 

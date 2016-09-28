@@ -7,6 +7,21 @@ app.config( function($stateProvider, $urlRouterProvider, $authProvider){
   $authProvider.tokenName="myToken";
   $authProvider.tokenPrefix="myApp";
   $authProvider.authHeader="data";
+  
+  $authProvider.github({
+  url: '/auth/github',
+  authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+  redirectUri: window.location.origin,
+  optionalUrlParams: ['scope'],
+  scope: ['user:email'],
+  scopeDelimiter: ' ',
+  oauthType: '2.0',
+  popupOptions: { width: 1020, height: 618 }
+  });
+  
+  $authProvider.github({
+      clientId: '21e3c9d7b7e0f1fbde3a'
+    });
 
   $stateProvider
     .state(
@@ -220,17 +235,38 @@ app.config( function($stateProvider, $urlRouterProvider, $authProvider){
       }
       )
     .state(
-      "login", {
+      "persona.login", {
         url:"/login",
-        templateUrl:"login.html",
-        controller:"controlLogin"
+        views:{
+          'contenido':{
+            templateUrl:"login.html",
+            controller:"controlLogin"
+          }
+        }
+      }
+      )
+    .state(
+      "persona.register", {
+        url:"/register",
+        views:{
+          'contenido':{
+            templateUrl:"register.html",
+            controller:"controlRegister"
+          }
+        }
       }
       );
     $urlRouterProvider.otherwise('/inicio');
 });
 
-app.controller("controlInicio", function($scope){
+app.controller("controlInicio", function($scope, $auth, $state){
+  $scope.auth = $auth.isAuthenticated();
 
+  $scope.logout = function(){
+    $auth.logout();
+    console.log($auth.isAuthenticated());
+    $state.reload();
+  }
 });
 
 app.controller("controlPersona", function($scope){
@@ -243,7 +279,11 @@ app.controller("controlPersonaMenu", function($scope, $state){
   };
 });
 
-app.controller("controlPersonaAlta", function($scope, FileUploader){
+app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $state){
+
+  if(!$auth.isAuthenticated()){
+    $state.go('persona.login');
+  }
 
   $scope.uploader = new FileUploader({url: 'PHP/upload.php'});
   $scope.uploader.queueLimit = 1; // indico cuantos archivos permito cargar
@@ -308,7 +348,7 @@ app.controller("controlPersonaAlta", function($scope, FileUploader){
 
 });
 
-app.controller("controlPersonaGrilla", function($scope, $http){
+app.controller("controlPersonaGrilla", function($scope, $http, $auth){
     $scope.DatoTest="**grilla**";
   
  /* $http.get('PHP/nexo.php', { params: {accion :"traer"}})
@@ -351,7 +391,11 @@ $http.get('http://www.mocky.io/v2/57c8229b120000f903e76996')
              the error callback will not be called for such responses.
    */
   $scope.Borrar=function(persona){
-    console.log("borrar"+persona);
+    if(!$auth.isAuthenticated()){
+      alert("Usted no posee permisos");
+    } else {
+      console.log("borrar"+persona);
+    }
 
 
 
@@ -384,7 +428,11 @@ $http.get('http://www.mocky.io/v2/57c8229b120000f903e76996')
 
   $scope.Modificar=function(id){
     
-    console.log("Modificar"+id);
+    if(!$auth.isAuthenticated()){
+      alert("Usted no posee permisos");
+    } else {
+      console.log("Modificar"+id);
+    }
   }
 
 });
@@ -449,31 +497,51 @@ app.controller("controlJuegoEjercicio13", function($scope){
 
 });
 
-app.controller("controlLogin", function($scope, $auth){
+app.controller("controlLogin", function($scope, $auth, $state){
 
+  console.log(window.location.origin);
 
   if($auth.isAuthenticated()){
-        console.info("info login: ", $auth.getPayload(), $auth.isAuthenticated());
-      }else {
-        console.info("No Loguea: ", $auth.getPayload(), $auth.isAuthenticated());
-      }
+    console.info("Logged: ", $auth.getPayload(), $auth.isAuthenticated());
+  }else {
+    console.info("No esta logueado: ", $auth.getPayload(), $auth.isAuthenticated());
+  }
 
+
+  $scope.authenticate = function(provider) {
+    $auth.authenticate(provider)
+      .then(function(response) {
+        console.log($auth.isAuthenticated());
+      })
+      .catch(function(response) {
+        // Something went wrong.
+      });
+  };
 
 
   $scope.Ingresar = function(){
 
-    $auth.login({usuario:$scope.persona.user, clave:$scope.persona.password})
+    var user = {usuario:$scope.persona.user, clave:$scope.persona.password};
+
+    $auth.login(user)
     .then(function(respuesta){
        console.info("info respuesta", respuesta);
 
 
       if($auth.isAuthenticated()){
-        console.info("info login: ", $auth.getPayload(), $auth.isAuthenticated());
+        console.info("Logged: ", $auth.getPayload(), $auth.isAuthenticated());
+        $state.go('inicio');
       }else {
-        console.info("No Loguea: ", $auth.getPayload(), $auth.isAuthenticated());
+        console.info("No esta logueado: ", $auth.getPayload(), $auth.isAuthenticated());
       }
     },function(respuesta){
-       
+       console.error("Error Login", respueta);
     });
   }
+  
+  
+});
+
+app.controller("controlRegister", function($scope){
+
 });
