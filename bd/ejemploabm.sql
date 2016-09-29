@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2016 a las 02:27:45
+-- Tiempo de generación: 29-09-2016 a las 06:42:54
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 5.6.19
 
@@ -82,22 +82,34 @@ CREATE TABLE `persona` (
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `dni` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `foto` varchar(50) COLLATE utf8_spanish2_ci NOT NULL
+  `foto` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `edad` int(3) UNSIGNED DEFAULT NULL,
+  `estadoCivil` varchar(15) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `sexo` varchar(10) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `pass` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `csharp` tinyint(1) DEFAULT NULL,
+  `php` tinyint(1) DEFAULT NULL,
+  `visual` tinyint(1) DEFAULT NULL,
+  `html` tinyint(1) DEFAULT NULL,
+  `javascript` tinyint(1) DEFAULT NULL,
+  `java` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`id`, `nombre`, `apellido`, `dni`, `foto`) VALUES
-(4, 'Rogelio', 'Agua', '333333', '333333.jpg'),
-(5, 'Bañera', 'Giratoria', '222222', '222222.jpg'),
-(6, 'Julieta', 'Roberto', '888888', '888888.jpg'),
-(7, 'Tomas', 'Crucero', '777777', '777777.jpg'),
-(8, 'Alfredo', 'Mercurio', '999999', '999999.jpg'),
-(9, 'Jaime', 'Marrón', '555555', '555555.jpg'),
-(10, 'Esteban', 'Trabajos', '111111', '111111.jpg'),
-(12, 'Miguel', 'Zorro', '444444', '444444.jpg');
+INSERT INTO `persona` (`id`, `nombre`, `apellido`, `dni`, `foto`, `email`, `edad`, `estadoCivil`, `sexo`, `fecha`, `pass`, `csharp`, `php`, `visual`, `html`, `javascript`, `java`) VALUES
+(4, 'Rogelio', 'Agua', '333333', '333333.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Bañera', 'Giratoria', '222222', '222222.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'Julieta', 'Roberto', '888888', '888888.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Tomas', 'Crucero', '777777', '777777.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'Alfredo', 'Mercurio', '999999', '999999.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'Jaime', 'Marrón', '555555', '555555.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 'Esteban', 'Trabajos', '111111', '111111.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 'Miguel', 'Zorro', '444444', '444444.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -111,7 +123,6 @@ CREATE TABLE `usuario` (
   `pass` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
   `nombre` varchar(50) COLLATE latin1_spanish_ci NOT NULL DEFAULT 'sin dato',
   `apellido` varchar(50) COLLATE latin1_spanish_ci NOT NULL DEFAULT 'sin dato',
-  `categoria` varchar(50) COLLATE latin1_spanish_ci NOT NULL DEFAULT 'operador',
   `email` varchar(50) COLLATE latin1_spanish_ci NOT NULL DEFAULT 'ejemplo@correo.com'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
@@ -119,9 +130,10 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `username`, `pass`, `nombre`, `apellido`, `categoria`, `email`) VALUES
-(1, 'lferreyra', 'facil1234', 'Leonardo', 'Ferrreyra', 'operador', 'leonardogferreyra@gmail.com'),
-(2, 'admin', 'facil', 'sin dato', 'sin dato', 'admin', 'ejemplo@correo.com');
+INSERT INTO `usuario` (`id`, `username`, `pass`, `nombre`, `apellido`, `email`) VALUES
+(1, 'lferreyra', 'facil1234', 'Leonardo', 'Ferrreyra', 'leonardogferreyra@gmail.com'),
+(2, 'admin', 'facil', 'sin dato', 'sin dato', 'ejemplo@correo.com'),
+(3, 'lferreyra', 'facil', 'Leonardo', 'Ferreyra', 'leogus_7@hotmail.com');
 
 --
 -- Índices para tablas volcadas
@@ -152,7 +164,7 @@ ALTER TABLE `persona`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

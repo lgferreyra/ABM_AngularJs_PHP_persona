@@ -32,6 +32,10 @@ else{
     if($respuesta->datos->accion=="registrar"){
         echo Usuario::InsertarUsuario($respuesta->datos->usuario);
     }
+    
+    if($respuesta->datos->accion=="borrar"){
+        echo Persona::BorrarPersona($respuesta->datos->id);
+    }
 	//echo $respuesta->datos->persona->nombre;
 
 	//Persona::InsertarPersona($respuesta->datos->persona);

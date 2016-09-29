@@ -87,10 +87,11 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
 
 });
 
-app.controller("controlPersonaGrilla", function($scope, $http, $auth){
+app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
     $scope.DatoTest="**grilla**";
+    $scope.ListadoPersonas = {};
   
- /* $http.get('PHP/nexo.php', { params: {accion :"traer"}})
+  $http.get('PHP/nexo.php', { params: {accion :"traer"}})
   .then(function(respuesta) {       
 
          $scope.ListadoPersonas = respuesta.data.listado;
@@ -100,16 +101,17 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth){
          $scope.ListadoPersonas= [];
         console.log( response);
         
-   });*/
+   });
 
-$http.get('http://www.mocky.io/v2/57c8229b120000f903e76996')
-.then( function(datos){
-  $scope.listadoDeDatos = datos.data;
-  console.log(datos.data);
-}, function(error){
-  console.info("error: ", error);
-  $scope.listadoDeDatos = [];
-});
+
+/*    $http.get('http://www.mocky.io/v2/57c8229b120000f903e76996')
+    .then( function(datos){
+      $scope.listadoDeDatos = datos.data;
+      console.log(datos.data);
+    }, function(error){
+      console.info("error: ", error);
+      $scope.listadoDeDatos = [];
+    }); */
 
 
   /*
@@ -133,7 +135,14 @@ $http.get('http://www.mocky.io/v2/57c8229b120000f903e76996')
     if(!$auth.isAuthenticated()){
       alert("Usted no posee permisos");
     } else {
-      console.log("borrar"+persona);
+      $http.post('PHP/nexo.php', { datos: {accion :"borrar", id: persona.id}})
+      .then(function(response){
+            console.log(response);
+            $state.reload();
+            },
+            function(response){
+          console.error(response);
+      });
     }
 
 
