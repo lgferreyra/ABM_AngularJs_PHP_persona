@@ -18,7 +18,9 @@ app.controller("controlPersonaMenu", function($scope, $state){
   };
 });
 
-app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $state){
+app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $state, $stateParams){
+
+  console.log($stateParams);
 
   if(!$auth.isAuthenticated()){
     $state.go('persona.login');
@@ -27,23 +29,23 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
   $scope.uploader = new FileUploader({url: 'PHP/upload.php'});
   $scope.uploader.queueLimit = 1; // indico cuantos archivos permito cargar
             
-      /* Si quiero restringir los archivos a imagenes añado este filtro */
-      $scope.uploader.filters.push({
-              name: 'imageFilter',
-              fn: function(item, options) {
-                  var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                  return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-              }
-          });
-
-          /** funcion para mi boton cargar si quiero agregar funcionalidad, 
-           de lo contrario uso el item.upload() en la vista **/
-          $scope.cargar = function(){
-            /** llamo a la funcion uploadAll para cargar toda la cola de archivos **/
-            $scope.uploader.uploadAll();
-            /** agrego mi funcionalidad **/
-
+  /* Si quiero restringir los archivos a imagenes añado este filtro */
+  $scope.uploader.filters.push({
+          name: 'imageFilter',
+          fn: function(item, options) {
+              var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+              return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
           }
+  });
+
+  /** funcion para mi boton cargar si quiero agregar funcionalidad, 
+   de lo contrario uso el item.upload() en la vista **/
+  $scope.cargar = function(){
+    /** llamo a la funcion uploadAll para cargar toda la cola de archivos **/
+    $scope.uploader.uploadAll();
+    /** agrego mi funcionalidad **/
+
+  }
       /***********************************************
       *  Funciones callbacks que nos dan informacion *
       *  en el proceso de carga de archivos          *
@@ -85,13 +87,36 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
           };
 
 
+  $scope.Guardar = function(){
+    if($state.params.modificar==null){
+      http.post('ws1/persona/'+ persona, { datos : {accion:"crear", persona: persona}})
+      .then(function(response){
+          console.log(response);
+          $state.reload();
+      }, 
+      function(response){
+          console.error(response);
+      });
+    } else {
+      $http.put('ws1/persona/', { datos: {accion :"modificar", persona: persona}})
+      .then(function(response){
+            console.log(response);
+            $state.reload();
+            },
+            function(response){
+          console.error(response);
+      });
+    }
+     
+  }
+ 
 });
 
 app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
     $scope.DatoTest="**grilla**";
     $scope.ListadoPersonas = {};
   
-  $http.get('PHP/nexo.php', { params: {accion :"traer"}})
+  $http.get('ws1/personas', { datos: {accion :"traerTodas"}})
   .then(function(respuesta) {       
 
          $scope.ListadoPersonas = respuesta.data.listado;
@@ -99,7 +124,7 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
 
     },function errorCallback(response) {
          $scope.ListadoPersonas= [];
-        console.log( response);
+        console.log(response);
         
    });
 
@@ -135,7 +160,7 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
     if(!$auth.isAuthenticated()){
       alert("Usted no posee permisos");
     } else {
-      $http.post('PHP/nexo.php', { datos: {accion :"borrar", id: persona.id}})
+      $http.delete('ws1/persona/'+ persona.id, { datos: {accion :"borrar", id: persona.id}})
       .then(function(response){
             console.log(response);
             $state.reload();
@@ -174,13 +199,11 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
 
 
 
-  $scope.Modificar=function(id){
+  $scope.Modificar=function(persona){
     
-    if(!$auth.isAuthenticated()){
-      alert("Usted no posee permisos");
-    } else {
-      console.log("Modificar"+id);
-    }
+
+      $state.go("persona.alta", persona);
+
   }
 
 });

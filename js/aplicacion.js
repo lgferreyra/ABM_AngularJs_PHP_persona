@@ -63,7 +63,7 @@ app.config( function($stateProvider, $urlRouterProvider, $authProvider){
       )
     .state(
       "persona.alta", {
-        url:"/alta",
+        url:"/alta/:modificar",
         views:{
           'contenido':{
             templateUrl:"personaAlta.html",
