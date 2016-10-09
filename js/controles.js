@@ -18,13 +18,31 @@ app.controller("controlPersonaMenu", function($scope, $state){
   };
 });
 
-app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $state, $stateParams){
+app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $state, $stateParams, $http){
 
-  console.log($stateParams);
-
-  if(!$auth.isAuthenticated()){
-    $state.go('persona.login');
+  
+  if($stateParams.modificar!=null){
+    $scope.persona = $stateParams.modificar;
+    $scope.persona.dni = parseInt($stateParams.modificar.dni);
+  } else {
+    $scope.persona = {};
+    $scope.persona.nombre = "probando";
+    $scope.persona.apellido = "probando";
+    $scope.persona.email = "leonardogferreyra@gmail.com";
+    $scope.persona.edad = 12;
+    $scope.persona.dni = 12341234;
+    $scope.persona.sexo = "Male";
+    $scope.persona.estadoCivil = "soltero";
+    $scope.persona.fecha = new Date("1990-08-07");
+    $scope.persona.pass = "lalala";
+    $scope.persona.rePass = "lalala";
+    $scope.persona.php = true;
   }
+
+  console.log($scope.persona);
+  /*if(!$auth.isAuthenticated()){
+    $state.go('persona.login');
+  }*/
 
   $scope.uploader = new FileUploader({url: 'PHP/upload.php'});
   $scope.uploader.queueLimit = 1; // indico cuantos archivos permito cargar
@@ -88,8 +106,8 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
 
 
   $scope.Guardar = function(){
-    if($state.params.modificar==null){
-      http.post('ws1/persona/'+ persona, { datos : {accion:"crear", persona: persona}})
+    if($stateParams.modificar==null){
+      $http.post('ws1/persona/'+ JSON.stringify($scope.persona))
       .then(function(response){
           console.log(response);
           $state.reload();
@@ -98,7 +116,7 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
           console.error(response);
       });
     } else {
-      $http.put('ws1/persona/', { datos: {accion :"modificar", persona: persona}})
+      $http.put('ws1/persona/' + JSON.stringify($scope.persona), { datos: {accion :"modificar", persona: $scope.persona}})
       .then(function(response){
             console.log(response);
             $state.reload();
@@ -157,9 +175,6 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
              the error callback will not be called for such responses.
    */
   $scope.Borrar=function(persona){
-    if(!$auth.isAuthenticated()){
-      alert("Usted no posee permisos");
-    } else {
       $http.delete('ws1/persona/'+ persona.id, { datos: {accion :"borrar", id: persona.id}})
       .then(function(response){
             console.log(response);
@@ -168,8 +183,7 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
             function(response){
           console.error(response);
       });
-    }
-
+  }
 
 
 /*$http.post("PHP/nexo.php",{accion :"borrar",persona:persona},{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
@@ -194,7 +208,6 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
     });
 
 */
-  }
 
 
 
@@ -202,7 +215,7 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
   $scope.Modificar=function(persona){
     
 
-      $state.go("persona.alta", persona);
+      $state.go("persona.alta", {modificar:persona});
 
   }
 

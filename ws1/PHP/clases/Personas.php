@@ -10,6 +10,17 @@ class Persona
     public $email;
   	public $dni;
   	public $foto;
+	public $edad;
+	public $estadoCivil;
+	public $sexo;
+	public $fecha;
+	public $pass;
+	public $csharp;
+	public $php;
+	public $visual;
+	public $html;
+	public $javascritp;
+	public $java;
 
 //--------------------------------------------------------------------------------//
 
@@ -43,6 +54,46 @@ class Persona
     {
         return $this->edad;
     }
+	public function GetSexo()
+    {
+        return $this->sexo;
+    }
+	public function GetEstadoCivil()
+    {
+        return $this->estadoCivil;
+    }
+	public function GetFecha()
+    {
+        return $this->fecha;
+    }
+	public function GetPass()
+    {
+        return $this->pass;
+    }
+	public function GetCsharp()
+    {
+        return $this->csharp;
+    }
+	public function GetPhp()
+    {
+        return $this->php;
+    }
+	public function GetVisual()
+    {
+        return $this->visual;
+    }
+	public function GetHtml()
+    {
+        return $this->html;
+    }
+	public function GetJavascript()
+    {
+        return $this->javascript;
+    }
+	public function GetJava()
+    {
+        return $this->java;
+    }
 
 	public function SetId($valor)
 	{
@@ -72,19 +123,68 @@ class Persona
     {
         $this->edad = $valor;
     }
+	public function SetEstadoCivil($valor)
+    {
+        $this->estadoCivil = $valor;
+    }
+	public function SetSexo($valor)
+    {
+        $this->sexo = $valor;
+    }
+	public function SetFecha($valor)
+    {
+        $this->fecha = $valor;
+    }
+	public function SetPass($valor)
+    {
+        $this->pass = $valor;
+    }
+	public function SetCsharp($valor)
+    {
+        $this->csharp = $valor;
+    }
+	public function SetPhp($valor)
+    {
+        $this->php = $valor;
+    }
+	public function SetVisual($valor)
+    {
+        $this->visual = $valor;
+    }
+	public function SetHtml($valor)
+    {
+        $this->html = $valor;
+    }
+	public function SetJavascript($valor)
+    {
+        $this->javascript = $valor;
+    }
+	public function SetJava($valor)
+    {
+        $this->java = $valor;
+    }
 //--------------------------------------------------------------------------------//
 //--CONSTRUCTOR
-	public function __construct($dni=NULL)
+	public function __construct($id=NULL)
 	{
 		if($dni != NULL){
-			$obj = Persona::TraerUnaPersona($dni);
+			$obj = Persona::TraerUnaPersona($id);
 			
 			$this->apellido = $obj->apellido;
 			$this->nombre = $obj->nombre;
-			$this->dni = $dni;
+			$this->dni = $obj->dni;
 			$this->foto = $obj->foto;
             $this->email = $obj->email;
             $this->edad = $obj->edad;
+			$this->estadoCivil = $obj->estadoCivil;
+			$this->sexo = $obj->sexo;
+			$this->fecha = $obj->fecha;
+			$this->csharp = $obj->csharp;
+			$this->php = $obj->php;
+			$this->visual = $obj->visual;
+			$this->html = $obj->html;
+			$this->javascript = $obj->javascript;
+			$this->java = $obj->java;
 		}
 	}
 

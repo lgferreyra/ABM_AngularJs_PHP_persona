@@ -106,6 +106,7 @@ $app->post('/persona/{persona}', function ($request, $response, $args) {
 
 //PUT: Para editar una persona
 $app->put('/persona/{persona}', function ($request, $response, $args) {
+    var_dump($args['persona']);
     $persona = json_decode($args['persona']);
     $respuesta = Persona::ModificarPersona($persona);
     $response->write($respuesta);
