@@ -81,8 +81,8 @@ $app->delete('/usuario/{id}', function ($request, $response, $args) {
 
 // GET: traer todas las personas
 $app->get('/personas[/]', function ($request, $response, $args) {
-    $respuesta= array();
-    $respuesta['listado']=Persona::TraerTodasLasPersonas();
+    //$respuesta= array();
+    $respuesta=Persona::TraerTodasLasPersonas();
     $arrayJson = json_encode($respuesta);
     $response->write($arrayJson);
     return $response;

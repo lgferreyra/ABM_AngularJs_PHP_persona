@@ -36,10 +36,16 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
     $scope.persona.fecha = new Date("1990-08-07");
     $scope.persona.pass = "lalala";
     $scope.persona.rePass = "lalala";
+    $scope.persona.csharp = false;
     $scope.persona.php = true;
+    $scope.persona.visual = false;
+    $scope.persona.html = false;
+    $scope.persona.javascript = false;
+    $scope.persona.java = false;
+    $scope.persona.foto = "pordefecto.png";
+
   }
 
-  console.log($scope.persona);
   /*if(!$auth.isAuthenticated()){
     $state.go('persona.login');
   }*/
