@@ -167,9 +167,10 @@ class Persona
 //--CONSTRUCTOR
 	public function __construct($id=NULL)
 	{
-		if($dni != NULL){
+		if($id != NULL){
 			$obj = Persona::TraerUnaPersona($id);
 			
+			$this->id = $obj->id;
 			$this->apellido = $obj->apellido;
 			$this->nombre = $obj->nombre;
 			$this->dni = $obj->dni;

@@ -1,6 +1,7 @@
-angular.module('ABMangularPHP').service('personaService', function($http){
+angular.module('myApp').service('personaService', function($http){
 
-	var url = "http://www.lgferreyra.esy.es/PersonaPHP/ws1";
+	//var url = "http://www.lgferreyra.esy.es/PersonaPHP/ws1";
+	var url = "http://localhost:8080/ABM_AngularJs_PHP_persona/ws1";
 
 	function success(data){
 		console.info(data);
@@ -28,7 +29,7 @@ angular.module('ABMangularPHP').service('personaService', function($http){
 
 	this.trearUna = function(id){
 		return $http.get(url + /persona/ + id)
-		.then(success,failure;
+		.then(success,failure);
 	}
 
 	this.modificar = function(persona){
