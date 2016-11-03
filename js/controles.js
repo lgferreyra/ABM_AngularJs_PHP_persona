@@ -130,11 +130,20 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
  
 });
 
-app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
+app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state, personaService){
     $scope.DatoTest="**grilla**";
     $scope.ListadoPersonas = {};
   
-  $http.get('ws1/personas', { datos: {accion :"traerTodas"}})
+    console.info(personaService);
+
+    personaService.traerTodas()
+    .then(function(data){
+      $scope.ListadoPersonas = data;
+    },
+    function(error){
+      console.error(error);
+    });
+  /*$http.get('ws1/personas', { datos: {accion :"traerTodas"}})
   .then(function(respuesta) {       
 
          $scope.ListadoPersonas = respuesta.data.listado;
@@ -144,7 +153,9 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state){
          $scope.ListadoPersonas= [];
         console.log(response);
         
-   });
+   });*/
+
+
 
 
 /*    $http.get('http://www.mocky.io/v2/57c8229b120000f903e76996')
